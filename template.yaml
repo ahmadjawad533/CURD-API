@@ -1,0 +1,69 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Java CRUD API with Lambda & DynamoDB
+
+Resources:
+  CreateUserFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: com.example.awscrud.CreateUserFunction::handleRequest
+      Runtime: java17
+      MemorySize: 512
+      Timeout: 10
+      Policies: AmazonDynamoDBFullAccess
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /user
+            Method: post
+
+  GetUserFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: com.example.awscrud.GetUserFunction::handleRequest
+      Runtime: java17
+      MemorySize: 512
+      Timeout: 10
+      Policies: AmazonDynamoDBFullAccess
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /user/{userId}
+            Method: get
+
+  UpdateUserFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: com.example.awscrud.UpdateUserFunction::handleRequest
+      Runtime: java17
+      MemorySize: 512
+      Timeout: 10
+      Policies: AmazonDynamoDBFullAccess
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /user
+            Method: put
+
+  DeleteUserFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: com.example.awscrud.DeleteUserFunction::handleRequest
+      Runtime: java17
+      MemorySize: 512
+      Timeout: 10
+      Policies: AmazonDynamoDBFullAccess
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /user
+            Method: delete
+
+Outputs:
+  ApiUrl:
+    Description: "API Gateway endpoint URL"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
