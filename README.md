@@ -70,12 +70,3 @@ Feel free to fork and contribute!
 
 
 ---
-
-## ✅ Where to Store Code?  
-- **4 Separate Files:**  
-   - `CreateUserFunction.java`  
-   - `GetUserFunction.java`  
-   - `UpdateUserFunction.java`  
-   - `DeleteUserFunction.java`  
-
-This follows **Lambda function per operation** — clean, scalable, easy to deploy separately.
